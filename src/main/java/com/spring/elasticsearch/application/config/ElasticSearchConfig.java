@@ -15,6 +15,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -25,12 +26,14 @@ public class ElasticSearchConfig {
     private static final String elasticSearchHost = "127.0.0.1";
     private static final int elasticSearchPort = 9300;
 
+
     @Bean
     public TransportClient client() throws UnknownHostException {
         TransportClient transportClient = new PreBuiltTransportClient(Settings.EMPTY);
         transportClient.addTransportAddress(new TransportAddress(InetAddress.getByName(elasticSearchHost), elasticSearchPort));
         return transportClient;
     }
+
 
     @Bean
     public RestHighLevelClient restHighLevelClient() {
@@ -42,13 +45,13 @@ public class ElasticSearchConfig {
     }
 
     @Bean
-    public ElasticsearchOperations elasticsearchRestOperations() throws UnknownHostException {
+    public ElasticsearchOperations elasticsearchRestTemplate() throws UnknownHostException {
         return new ElasticsearchRestTemplate(restHighLevelClient());
     }
 
 
     @Bean
-    public ElasticsearchOperations elasticsearchOperations() throws UnknownHostException {
+    public ElasticsearchOperations elasticsearchTemplate() throws UnknownHostException {
         return new ElasticsearchTemplate(client());
     }
 

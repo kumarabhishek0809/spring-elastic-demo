@@ -28,14 +28,14 @@ public class CarElasticDataSource {
     @EventListener(org.springframework.boot.context.event.ApplicationReadyEvent.class)
     public void populateData() {
         log.info("Start Delete");
-        ResponseEntity<String> deleteCars = restTemplate.exchange("http://localhost:9200/car", HttpMethod.DELETE, null, String.class);
-        log.info("End Delete"+deleteCars.getBody());
+        ResponseEntity<String> deleteCars = restTemplate.exchange("http://127.0.0.1:9200/car", HttpMethod.DELETE, null, String.class);
+        log.info("End Delete" + deleteCars.getBody());
         List<Car> cars = new ArrayList<>();
         for (int i = 0; i < 10000; i++) {
             cars.add(carService.generateCar());
         }
         carRepository.saveAll(cars);
-        log.info("Car Count "+carRepository.count());
+        log.info("Car Count " + carRepository.count());
     }
 
 }

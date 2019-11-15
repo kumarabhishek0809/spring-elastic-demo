@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 }
@@ -23,11 +23,17 @@ repositories {
 }
 
 ext {
-	elasticSearchVersion = '7.4.0'
+	elasticSearchVersion = '6.8.0'
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+	implementation ('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+     /*{
+		exclude group: 'org.elasticsearch'
+		exclude group: 'org.elasticsearch.plugin'
+		exclude group: 'org.elasticsearch.client'
+	}
+    */
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -39,6 +45,13 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
+
+    /*
+	implementation("org.elasticsearch:elasticsearch:${elasticSearchVersion}") { force = true }
+	implementation("org.elasticsearch.client:elasticsearch-rest-high-level-client:${elasticSearchVersion}") { force = true }
+	implementation("org.elasticsearch.client:elasticsearch-rest-client:${elasticSearchVersion}") { force = true }
+	*/
+
 
 }
 
