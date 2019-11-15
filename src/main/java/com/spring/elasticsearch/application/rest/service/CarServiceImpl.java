@@ -50,7 +50,7 @@ public class CarServiceImpl implements CarService {
         for (int i = 0; i < 3; i++) {
             String tyreManufacture = TYRE_MANUFACTURES.get(random.nextInt(TYRE_MANUFACTURES.size()));
             int tyreSize = 15+random.nextInt(3);
-            int tyrePrice = 200 + random.nextInt(random.nextInt(201));
+            int tyrePrice = 200 + random.nextInt(201);
 
             Tyre tyre = new Tyre(tyreManufacture, tyreSize, tyrePrice);
             tyres.add(tyre);
