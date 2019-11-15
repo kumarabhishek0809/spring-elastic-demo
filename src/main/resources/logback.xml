@@ -5,7 +5,8 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- By default, encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
-            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
+            </pattern>
         </encoder>
     </appender>
 
@@ -23,17 +24,21 @@
         </rollingPolicy>
 
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>2MB</MaxFileSize>
+            <MaxFileSize>20MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
 
-    <logger name="com.spring.elasticsearch.application" level="INFO" additivity="false">
-        <appender-ref ref="STDOUT" />
+    <logger name="com.spring.elasticsearch.application" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="org.hibernate.SQL" level="trace" additivity="false">
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE" />
     </logger>
 
     <!-- By default, the level of the root level is set to DEBUG -->
-    <root level="info">
-        <appender-ref ref="STDOUT" />
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
