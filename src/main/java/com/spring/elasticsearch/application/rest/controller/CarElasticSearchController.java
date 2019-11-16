@@ -22,6 +22,7 @@ public class CarElasticSearchController {
     @Autowired
     private CarRepository carRepository;
 
+    // /v1/ES/cars/count
     @RequestMapping(path = "/cars/count", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public long countCar() {
         return carRepository.count();
